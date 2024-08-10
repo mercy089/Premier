@@ -21,7 +21,7 @@
         <h2><i class="ri-search-line"></i></h2>
         <h3><i class="ri-menu-3-line"></i></h3>
       </nav>
-      <div class="page1">
+      <div class="page1" id="page1">
         <div class="content">
           <video src="./assest/video/video.mp4" autoplay muted loop></video>
           <div class="overlay">
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="scroll">
+      <div class="scroll" id="page2">
         <div class="container">
           <div class="profile">
             <div class="profileInfo">
@@ -190,7 +190,7 @@
         <h6>y</h6>
         <h6>z</h6>
       </div>
-      <div class="page2">
+      <div class="page2" id="page3">
         <div class="left">
           <img src="./assest/image/img2.jpg" alt="" />
         </div>
@@ -214,7 +214,7 @@
           </div>
         </div>
       </div>
-      <div class="page3">
+      <div class="page3" id="page4">
         <div class="content3">
           <h2>VOGUE / SHOT</h2>
           <div class="cont">
@@ -244,7 +244,7 @@
           </div>
         </div>
       </div>
-      <div class="page4">
+      <div class="page4" id="page5">
         <div class="content4">
           <img
             src="./assest/image/jamison-mcandie-uf4oyaimWwg-unsplash.jpg"
@@ -252,7 +252,7 @@
           />
         </div>
       </div>
-      <div class="page5">
+      <div class="page5" id="page6">
         <h1>UPDATE</h1>
         <div class="elem">
           <img
@@ -299,7 +299,7 @@
           </div>
         </div>
       </div>
-      <div class="page6">
+      <div class="page6" id="page7">
         <div class="left">
           <img
             src="https://images.unsplash.com/photo-1583766395091-2eb9994ed094?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1vZGVsfGVufDB8fDB8fHww"
@@ -339,7 +339,7 @@
           </div>
         </div>
       </div>
-      <div class="page4">
+      <div class="page4" id="page8">
         <div class="content4">
           <img
             src="./assest/image/viktor-hesse-GtqgCfZgpPI-unsplash.jpg"
@@ -347,7 +347,7 @@
           />
         </div>
       </div>
-      <div class="page2">
+      <div class="page2" id="page9">
         <div class="left">
           <img src="./assest/image/img3.jpg" alt="" />
         </div>
@@ -373,7 +373,7 @@
           </div>
         </div>
       </div>
-      <div class="scroll2">
+      <div class="scroll2" id="page10">
         <h2>PREMIER MODELS 2024</h2>
         <h2>PREMIER MODELS 2024</h2>
         <h2>PREMIER MODELS 2024</h2>
@@ -381,7 +381,7 @@
         <h2>PREMIER MODELS 2024</h2>
         <h2>PREMIER MODELS 2024</h2>
       </div>
-      <div class="page9">
+      <div class="page9" id="page11">
         <div class="left">
           <h2>BLOG</h2>
         </div>
@@ -419,7 +419,7 @@
         <h2>Women / Man</h2>
         <h2>Agency / Blog / Information</h2>
       </footer> -->
-      <footer>
+      <footer id="page12">
         <div class="social">
           <h5><i class="ri-instagram-line"></i></h5>
           <h5><i class="ri-twitter-fill"></i></h5>
@@ -457,6 +457,35 @@
       };
 
       Emblem.init(".emblem");
+      
+      document.addEventListener("DOMContentLoaded", function() {
+    // Define the list of section selectors
+    const sections = [
+      "#page1","#page2","#page3","#page4","#page5","#page6","#page7","#page8","#page9","#page10","#page11","#page12",
+    ];
+
+    let currentIndex = 0;
+
+    function scrollToSection(index) {
+      const section = document.querySelector(sections[index]);
+      if (section) {
+        const top = section.offsetTop;
+        window.scrollTo({
+          top: top,
+          behavior: "smooth"
+        });
+      }
+    }
+
+    function scrollPageByPage() {
+      scrollToSection(currentIndex);
+      currentIndex = (currentIndex + 1) % sections.length; // Cycle through sections
+      setTimeout(scrollPageByPage, 1500); // Schedule next scroll
+    }
+
+    setTimeout(scrollPageByPage, 1500); // Start scrolling after 1.5 seconds
+  });
+
     </script>
   </body>
 </html>
