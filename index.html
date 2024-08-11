@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>premier</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="responsivestyle.css" />
+    <!-- <link rel="stylesheet" href="responsivestyle.css" /> -->
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -227,7 +227,7 @@
                   />
                 </div>
                 <div class="emblem">
-                  Be  in  touch  interested  in  quality  Designs ?
+                  
                 </div>
               </div>
               <div class="info">
@@ -436,55 +436,68 @@
     </main>
     <script>
       var Emblem = {
-        init: function (selector, str) {
-          const element = document.querySelector(selector);
-          const text = str || element.innerHTML;
-          element.innerHTML = "";
+  init: function(el, str) {
+    var element = document.querySelector(el);
+    var text = str || element.innerHTML;
+    element.innerHTML = ''; // Clear the element
 
-          for (let i = 0; i < text.length; i++) {
-            const letter = text[i];
-            const span = document.createElement("span");
-            const node = document.createTextNode(letter);
-            const angle = (610/text.length) * i;
+    var radius = 20; // Radius of the circle
+    var angleStep = 360 / text.length; // Angle between each letter
 
-            span.appendChild(node);
-            span.style.transform = `rotateZ(${angle}deg) translate3d(${Math.cos(
-              angle
-            )}px, ${Math.sin(angle)}px, 0)`;
-            element.appendChild(span);
-          }
-        },
-      };
+    // Create a document fragment to optimize DOM manipulation
+    var fragment = document.createDocumentFragment();
 
-      Emblem.init(".emblem");
+    for (var i = 0; i < text.length; i++) {
+      var letter = text[i];
+      var span = document.createElement('span');
+      span.textContent = letter;
+
+      var angle = i * angleStep;
+      var radians = angle * Math.PI / 180;
+      var x = radius * Math.cos(radians);
+      var y = radius * Math.sin(radians);
+
+      span.style.position = 'absolute';
+      span.style.transform = `translate(${x}px, ${y}px) rotate(${angle + 90}deg)`;
+      span.style.transformOrigin = 'center center';
+
+      fragment.appendChild(span);
+    }
+
+    element.appendChild(fragment); // Append all at once
+  }
+};
+
+// Initialize with the selector and optional string
+Emblem.init('.emblem','Be in touch interested in quality Designs? ');
+
       
-      document.addEventListener("DOMContentLoaded", function() {
-    // Define the list of section selectors
-    const sections = [
-      "#page1","#page2","#page3","#page4","#page5","#page6","#page7","#page8","#page9","#page10","#page11","#page12",
-    ];
+  //     document.addEventListener("DOMContentLoaded", function() {
+  //   const sections = [
+  //     "#page1","#page2","#page3","#page4","#page5","#page6","#page7","#page8","#page9","#page10","#page11","#page12",
+  //   ];
 
-    let currentIndex = 0;
+  //   let currentIndex = 0;
 
-    function scrollToSection(index) {
-      const section = document.querySelector(sections[index]);
-      if (section) {
-        const top = section.offsetTop;
-        window.scrollTo({
-          top: top,
-          behavior: "smooth"
-        });
-      }
-    }
+  //   function scrollToSection(index) {
+  //     const section = document.querySelector(sections[index]);
+  //     if (section) {
+  //       const top = section.offsetTop;
+  //       window.scrollTo({
+  //         top: top,
+  //         behavior: "smooth"
+  //       });
+  //     }
+  //   }
 
-    function scrollPageByPage() {
-      scrollToSection(currentIndex);
-      currentIndex = (currentIndex + 1) % sections.length; // Cycle through sections
-      setTimeout(scrollPageByPage, 1500); // Schedule next scroll
-    }
+  //   function scrollPageByPage() {
+  //     scrollToSection(currentIndex);
+  //     currentIndex = (currentIndex + 1) % sections.length; // Cycle through sections
+  //     setTimeout(scrollPageByPage, 1500); // Schedule next scroll
+  //   }
 
-    setTimeout(scrollPageByPage, 1500); // Start scrolling after 1.5 seconds
-  });
+  //   setTimeout(scrollPageByPage, 1500); // Start scrolling after 1.5 seconds
+  // });
 
     </script>
   </body>
